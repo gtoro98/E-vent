@@ -1,7 +1,7 @@
 
 const config = require("../config/db.config.js");
 
-const SequelizeFile = require("sequelize-file");
+
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
   config.DB,
@@ -30,7 +30,7 @@ console.log("EMpezo sequelize")
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.event = require("../models/event.model.js")(sequelize, Sequelize);
-db.picture = require("../models/attachments.js")(SequelizeFile);
+
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -42,7 +42,7 @@ db.user.belongsToMany(db.role, {
   foreignKey: "userId",
   otherKey: "roleId"
 });
-picture.addTo(User);
+
 
 db.event.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 
