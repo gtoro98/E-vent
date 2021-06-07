@@ -14,7 +14,8 @@ exports.signup = (req, res) => {
     name: req.body.name,
     lastName: req.body.lastName,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    image: req.body.imageURL
   })
     .then(user => {
 
@@ -26,9 +27,9 @@ exports.signup = (req, res) => {
             name: req.body.roles[0], 
           }
         }).then(roles => {
-          console.log("LO CONSEGUI")
+
           user.setRoles(roles).then(() => {
-            console.log("Encontre el problema")
+
             return res.status(200).send({ message: "User was registered successfully!" });
           });
         }).catch((err) => {

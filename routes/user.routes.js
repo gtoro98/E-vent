@@ -42,8 +42,10 @@ module.exports = function(app) {
     controller.getUsers
   );
   app.get(
-    "/api/user/:name}",
+    "/api/proveedor/:name",
     //[authJwt.verifyToken, authJwt.isAdmin],
-    controller.getUserbyName
+    controller.getProveedorbyName
   );
+
+  app.delete("/api/proveedor/:id", controller.deleteUser);
 };

@@ -64,6 +64,86 @@ const getUsers = (request, response) => {
     })
   }
 
+  //fernando*************************
+  app.post("/distribuidores", async(req,res) => {
+    try {
+        const { nombre } = req.body;
+        const newDistribuidor = await pool.query(
+            "INSERT INTO distribuidores (nombre) VALUES($1) RETURNING *",
+            [nombre]
+        );
+        res.json(newDistribuidor.rows[0]);
+
+
+    } catch (error) {
+        console.error(error.message)
+    }
+
+})
+
+
+
+//GET ALL
+
+app.get("/distribuidores", async(req,res) => {
+    try {
+        const allDis = await pool.query("SELECT * FROM distribuidores");
+        res.json(allDis.rows)
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+
+
+})
+
+
+//GET
+app.get("/distribuidores/:id", async (req,res) => {
+
+try {
+    const {id} = req.params;
+    const distribuidor = await pool.query("SELECT * FROM distribuidores WHERE distribuidores_id = $1", [id])
+    res.json(distribuidor.rows[0])
+} catch (error) {
+    console.error(error.message)
+}})
+
+
+//UPDATE
+
+app.put("/distribuidores/:id", async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {nombre} = req.body;
+        const updateDistribuidor = await pool.query("UPDATE distribuidores SET nombre = $1 WHERE distribuidores_id = $2",
+        [nombre, id]);
+        res.json("El nombre del distribuidor ha sido actualizado!")
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//DELETE
+
+app.delete("/distribuidores/:id", async (req, res) => {
+try {
+    const {id} = req.params;
+    const deleteDistribuidor = await pool.query("UPDATE distribuidores SET activo = false WHERE distribuidores_id = $1", 
+    [id]);
+    res.json("El distribuidor ha sido eliminado exitosamente")
+} catch (error) {
+    console.error(error.message)
+}
+})
+
+///fernando*******************
+
+
+
+
+
   module.exports = {
     getUsers,
     getUserById,
