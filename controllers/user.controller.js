@@ -45,18 +45,46 @@ exports.allAccess = (req, res) => {
     
     return;
   };
-  exports.getUserbyName = (req, res) =>{
+  exports.getProveedorbyName = (req, res) =>{
 
-    Role.findByPk(1).then(role => {
+    Role.findByPk(3).then(role => {
       role.getUsers(
         {where: {
-          name: req.body.name
+          name: {
+            [Op.like]: '%' + req.params.name + '%'
+          } 
         }}
-      ).then(users => {
-        res.status(200).send(users);
+      ).then(proveedores => {
+        res.status(200).send(proveedores);
         return;
       })
+    }).catch(err => {
+      res.status(400).send(err)
     })
     
     return;
   };
+
+  exports.deleteUser = (req,res) =>{
+
+    User.destroy({
+      where: { id: req.params.id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "User was deleted successfully!"
+          });
+        } else {
+          res.send({
+            message: `Cannot delete User with id=${id}. Maybe User was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete User with id=" + id
+        });
+      });
+  };
+
