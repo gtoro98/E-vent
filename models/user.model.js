@@ -1,3 +1,5 @@
+
+
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("users", {
       name: {
@@ -14,6 +16,8 @@ module.exports = (sequelize, Sequelize) => {
       }
     });
   
+
+
     return User;
   };
   
