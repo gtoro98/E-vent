@@ -30,7 +30,7 @@ console.log("EMpezo sequelize")
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.event = require("../models/event.model.js")(sequelize, Sequelize);
-db.distribuidor = require("../models/distribuidor.model.js")(sequelize, Sequelize);
+db.service = require("../models/service.model.js")(sequelize, Sequelize);
 
 
 
@@ -47,6 +47,7 @@ db.user.belongsToMany(db.role, {
 
 
 db.event.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
+db.service.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 
 db.ROLES = ["user", "admin", "proveedor"];
 
