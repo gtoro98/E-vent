@@ -16,7 +16,16 @@ module.exports = (sequelize, Sequelize) => {
       },
       image: {
         type: Sequelize.STRING
-      }
+      },
+      direccion: {
+        type: Sequelize.STRING
+      },
+      telefono: {
+        type: Sequelize.BIGINT
+      },
+      cedula: {
+        type: Sequelize.BIGINT
+      },
     });
   
 

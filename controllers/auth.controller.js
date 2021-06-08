@@ -15,7 +15,10 @@ exports.signup = (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
-    image: req.body.imageURL
+    image: req.body.imageURL,
+    direccion: req.body.direccion,
+    telefono: req.body.telefono,
+    cedula: req.body.cedula
   })
     .then(user => {
 
