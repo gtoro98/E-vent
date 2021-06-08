@@ -31,7 +31,10 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.event = require("../models/event.model.js")(sequelize, Sequelize);
 db.service = require("../models/service.model.js")(sequelize, Sequelize);
+<<<<<<< HEAD
 
+=======
+>>>>>>> fer
 
 
 db.role.belongsToMany(db.user, {
