@@ -64,28 +64,28 @@ isAdmin = (req, res, next) => {
   });
 };
 
-isModerator = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
+isProveedor = (req, res, next) => {
+  User.findByPk(req.user_id).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "proveedor") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!"
+        message: "Require Proveedor Role!"
       });
     });
   });
 };
 
-isModeratorOrAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
+isProveedorOrAdmin = (req, res, next) => {
+  User.findByPk(req.user_id).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "proveedor") {
           next();
           return;
         }
@@ -107,7 +107,7 @@ const authJwt = {
   verifyToken: verifyToken,
   isUser: isUser,
   isAdmin: isAdmin,
-  isModerator: isModerator,
-  isModeratorOrAdmin: isModeratorOrAdmin
+  isProveedor: isProveedor,
+  isProveedorOrAdmin: isProveedorOrAdmin
 };
 module.exports = authJwt;
