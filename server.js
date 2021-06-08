@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 require('./routes/event.routes')(app);
-require('./routes/distribuidor.routes')(app);
+require('./routes/service.routes')(app);
 
 
 
@@ -37,4 +37,3 @@ app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
 });
 
-//Luis Probando el git push
