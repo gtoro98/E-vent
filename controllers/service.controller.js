@@ -33,7 +33,7 @@ exports.findAllService = (req,res) => {
     })
 };
 
-exports.deleteService = (req,res) =>{
+/*exports.deleteService = (req,res) =>{
     Service.update({activo : "false"}, {
         where:{ 
             id : req.params.id
@@ -41,7 +41,30 @@ exports.deleteService = (req,res) =>{
     }).then(respuesta =>{
         res.status(200).send(respuesta);
     });
-}
+}*/
+
+exports.deleteService = (req,res) =>{
+
+    Service.destroy({
+      where: { id: req.params.id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Service was deleted successfully!"
+          });
+        } else {
+          res.send({
+            message: `Cannot delete Service with id=${id}. Maybe Service was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete Service with id=" + id
+        });
+      });
+  };
 
 exports.findServiceById = (req,res) => {
     Service.findByPk(req.params.id)
