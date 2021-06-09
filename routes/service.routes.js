@@ -11,13 +11,11 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/api/service/create",
+    "/api/service/create", 
     [authJwt.verifyToken, authJwt.isProveedor],
     controller.createService,
   );
 
-const  {authJwt}  = require("../middleware");
-const controller = require("../controllers/service.controller");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {

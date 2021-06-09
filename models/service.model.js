@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 module.exports = (sequelize, Sequelize) => {
     const Service = sequelize.define("services", {
@@ -23,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
     
     })
     return Service;
-=======
+    
 module.exports = (sequelize, Sequelize) => {
     const Service = sequelize.define("services", {
       name: {
@@ -51,5 +50,4 @@ module.exports = (sequelize, Sequelize) => {
     });
   
     return Service;
->>>>>>> fer
-  };
+  }};
