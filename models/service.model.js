@@ -3,14 +3,11 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING
       },
-      activo: {
-        type: Sequelize.BOOLEAN
+      price: {
+        type: Sequelize.FLOAT
       },
       description: {
         type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.FLOAT
       },
       promotion: {
         type: Sequelize.BOOLEAN
