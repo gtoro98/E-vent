@@ -6,6 +6,7 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { service } = require("../models");
 
 exports.createEvent = (req, res) => {
 
@@ -17,5 +18,18 @@ exports.createEvent = (req, res) => {
         user_id: req.body.user_id,
       })
   
+};
+
+exports.addService = (req, res) => {
+
+
+  Event.findByPk(req.params.event_id).then( event => {
+
+    service.findByPk(req.params.service_id).then(service => {
+      event.addService(service)
+    })
+    
+  })
+
 };
 
