@@ -16,6 +16,8 @@ exports.createEvent = (req, res) => {
         location: req.body.location,
         cant_personas: req.body.cant_personas,
         user_id: req.body.user_id,
+      }).then(()=> {
+        return res.status(200).send({ message: "User was registered successfully!" });
       })
   
 };
