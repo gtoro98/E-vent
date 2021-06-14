@@ -22,6 +22,7 @@ db.sequelize.sync();
 
 app.get('/', (req, res) => {
     res.send('Server is ready');
+ 
 
 });
 
