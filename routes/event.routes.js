@@ -1,4 +1,4 @@
-const  {authJwt}  = require("../middleware");
+const  {authJwt, verifyEvent}  = require("../middleware");
 const controller = require("../controllers/event.controller");
 
 module.exports = function(app) {
@@ -12,7 +12,7 @@ module.exports = function(app) {
 
   app.post(
     "/api/event/create",
-    [authJwt.verifyToken, authJwt.isUser],
+    [authJwt.verifyToken, authJwt.isUser, verifyEvent.checkDate],
     controller.createEvent,
   );
 
