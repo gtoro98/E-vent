@@ -22,6 +22,10 @@ db.sequelize.sync();
 
 app.get('/', (req, res) => {
     res.send('Server is ready');
+    var result = 'App is running'
+  response.send(result);
+}).listen(app.get('port'), function() {
+  console.log('App is running, server is listening on port ', app.get('port'));
 
 });
 
@@ -31,7 +35,7 @@ require('./routes/event.routes')(app);
 require('./routes/service.routes')(app);
 
 
-const port = process.env.port || 8080
+const port = process.env.port || 5000
 const host = '0.0.0.0';
 
 app.listen(port,host, () => {
