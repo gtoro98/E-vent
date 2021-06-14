@@ -42,6 +42,11 @@ module.exports = function(app) {
     controller.getUsers
   );
   app.get(
+    "/api/user/:id",
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    controller.getUserById
+  );
+  app.get(
     "/api/proveedores/:name",
     //[authJwt.verifyToken, authJwt.isAdmin],
     controller.getProveedorbyName

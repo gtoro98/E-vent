@@ -33,15 +33,6 @@ exports.findAllService = (req,res) => {
     })
 };
 
-/*exports.deleteService = (req,res) =>{
-    Service.update({activo : "false"}, {
-        where:{ 
-            id : req.params.id
-        }
-    }).then(respuesta =>{
-        res.status(200).send(respuesta);
-    });
-}*/
 
 exports.deleteService = (req,res) =>{
 
@@ -71,6 +62,14 @@ exports.findServiceById = (req,res) => {
     .then(respuesta=>{
         res.status(200).send(respuesta);
     })
+}
+
+exports.findServiceByProveedor = (req,res) => {
+  Service.findAll({
+    where:{
+      proveedor_id: req.params.proveedor_id
+    }
+  })
 }
 
 exports.updateService = (req,res) =>{

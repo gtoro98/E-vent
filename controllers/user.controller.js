@@ -65,6 +65,32 @@ exports.allAccess = (req, res) => {
     return;
   };
 
+  exports.getUserById = (req, res) =>{
+
+    User.findByPk(req.params.id).then(user => {
+      res.status(200).send(user);
+      return;
+      
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
+
+  exports.getUserPasswordById = (req, res) =>{
+
+    User.findByPk(req.params.id).then(user => {
+      user.data
+      res.status(200).send(user);
+      return;
+      
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
   exports.getUserbyName = (req, res) =>{
 
     Role.findByPk(1).then(role => {
