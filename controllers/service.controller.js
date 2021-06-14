@@ -83,11 +83,15 @@ exports.getServicebyName = (req, res) =>{
 };
 
 
-exports.findServiceByProveedor = (req,res) => {
+exports.findServicebyProveedor = (req,res) => {
   Service.findAll({
     where:{
       user_id: req.params.user_id
     }
+  }).then(services => {
+    res.status(200).send(services)
+  }).catch(err => {
+    res.status(400).send(err)
   })
 }
 
