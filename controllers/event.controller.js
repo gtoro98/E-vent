@@ -27,8 +27,13 @@ exports.addService = (req, res) => {
 
     service.findByPk(req.params.service_id).then(service => {
       event.addService(service)
+      return res.status(200).send({ message: "Event added successfully!" });
+    }).catch(err => {
+      return res.status(400).send({ message: "Problem finding service!" });
     })
     
+  }).catch(err => {
+    return res.status(400).send({ message: "Problem finding event!" });
   })
 
 };
