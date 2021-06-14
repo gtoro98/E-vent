@@ -65,6 +65,7 @@ exports.allAccess = (req, res) => {
     return;
   };
 
+  exports.getUsersbyName = (req, res) =>{
   exports.getUserById = (req, res) =>{
 
     User.findByPk(req.params.id).then(user => {
@@ -150,3 +151,4 @@ exports.allAccess = (req, res) => {
     });
 }
 
+  }
