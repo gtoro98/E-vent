@@ -17,8 +17,12 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/services",
+    "/api/services/",
     controller.findAllService
+  )
+  app.get(
+    "/api/services/:name",
+    controller.getServicebyName
   )
 
   app.delete(
