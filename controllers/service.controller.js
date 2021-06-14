@@ -67,7 +67,7 @@ exports.findServiceById = (req,res) => {
 exports.findServiceByProveedor = (req,res) => {
   Service.findAll({
     where:{
-      proveedor_id: req.params.proveedor_id
+      user_id: req.params.user_id
     }
   })
 }

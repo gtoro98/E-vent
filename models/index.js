@@ -58,7 +58,7 @@ db.service.belongsToMany(db.event, {
 
 
 db.event.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
-db.service.belongsTo(db.user, {foreignKey: 'proveedor_id', targetKey: 'id'});
+db.service.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 
 db.ROLES = ["user", "admin", "proveedor"];
 
