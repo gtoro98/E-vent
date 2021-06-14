@@ -31,7 +31,7 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/proveedores",
+    "/api/proveedores/",
     //[authJwt.verifyToken, authJwt.isAdmin],
     controller.getProveedores
   );
@@ -42,10 +42,21 @@ module.exports = function(app) {
     controller.getUsers
   );
   app.get(
-    "/api/proveedor/:name",
+    "/api/user/:id",
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    controller.getUserById
+  );
+  app.get(
+    "/api/proveedores/:name",
     //[authJwt.verifyToken, authJwt.isAdmin],
     controller.getProveedorbyName
   );
 
   app.delete("/api/proveedor/:id", controller.deleteUser);
+
+  app.put(
+    "/api/proveedor/:id",
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateUser
+  )
 };

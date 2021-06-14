@@ -45,6 +45,18 @@ db.user.belongsToMany(db.role, {
 });
 
 
+db.event.belongsToMany(db.service, {
+  through: "event_service",
+  foreignKey: "event_id",
+  otherKey: "service_id"
+});
+db.service.belongsToMany(db.event, {
+  through: "event_services",
+  foreignKey: "service_id",
+  otherKey: "event_id"
+});
+
+
 db.event.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 db.service.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 

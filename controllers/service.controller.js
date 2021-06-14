@@ -6,6 +6,7 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { service } = require("../models");
 
 
 exports.createService = (req, res) => {
@@ -33,15 +34,6 @@ exports.findAllService = (req,res) => {
     })
 };
 
-/*exports.deleteService = (req,res) =>{
-    Service.update({activo : "false"}, {
-        where:{ 
-            id : req.params.id
-        }
-    }).then(respuesta =>{
-        res.status(200).send(respuesta);
-    });
-}*/
 
 exports.deleteService = (req,res) =>{
 
@@ -71,6 +63,32 @@ exports.findServiceById = (req,res) => {
     .then(respuesta=>{
         res.status(200).send(respuesta);
     })
+}
+exports.getServicebyName = (req, res) =>{
+
+  Service.findAll({
+    where:{
+      name: {
+        [Op.like]: '%' + req.params.name + '%'
+      }
+    }
+  }).then(services => {
+    res.status(200).send(services);
+    return;
+  }).catch(err => {
+    res.status(400).send(err)
+  })
+  
+  return;
+};
+
+
+exports.findServiceByProveedor = (req,res) => {
+  Service.findAll({
+    where:{
+      user_id: req.params.user_id
+    }
+  })
 }
 
 exports.updateService = (req,res) =>{

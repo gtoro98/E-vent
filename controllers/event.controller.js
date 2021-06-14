@@ -6,6 +6,7 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { service } = require("../models");
 
 exports.createEvent = (req, res) => {
 
@@ -15,7 +16,27 @@ exports.createEvent = (req, res) => {
         location: req.body.location,
         cant_personas: req.body.cant_personas,
         user_id: req.body.user_id,
+      }).then(()=> {
+        return res.status(200).send({ message: "User was registered successfully!" });
       })
   
+};
+
+exports.addService = (req, res) => {
+
+
+  Event.findByPk(req.params.event_id).then( event => {
+
+    service.findByPk(req.params.service_id).then(service => {
+      event.addService(service)
+      return res.status(200).send({ message: "Event added successfully!" });
+    }).catch(err => {
+      return res.status(400).send({ message: "Problem finding service!" });
+    })
+    
+  }).catch(err => {
+    return res.status(400).send({ message: "Problem finding event!" });
+  })
+
 };
 

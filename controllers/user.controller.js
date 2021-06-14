@@ -65,6 +65,52 @@ exports.allAccess = (req, res) => {
     return;
   };
 
+  exports.getUserById = (req, res) =>{
+
+    User.findByPk(req.params.id).then(user => {
+      res.status(200).send(user);
+      return;
+      
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
+
+  exports.getUserPasswordById = (req, res) =>{
+
+    User.findByPk(req.params.id).then(user => {
+      user.data
+      res.status(200).send(user);
+      return;
+      
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
+  exports.getUserbyName = (req, res) =>{
+
+    Role.findByPk(1).then(role => {
+      role.getUsers(
+        {where: {
+          name: {
+            [Op.like]: '%' + req.params.name + '%'
+          } 
+        }}
+      ).then(proveedores => {
+        res.status(200).send(proveedores);
+        return;
+      })
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
+
   exports.deleteUser = (req,res) =>{
 
     User.destroy({
@@ -87,4 +133,20 @@ exports.allAccess = (req, res) => {
         });
       });
   };
+  exports.updateUser = (req,res) =>{
+    User.update({ 
+        name: req.body.name,
+        email: req.body.email,
+        image: req.body.image,
+        direccion: req.body.direccion,
+        telefono: req.body.telefono, 
+        
+       }, {
+        where:{ 
+            id : req.params.id
+        }
+    }).then(respuesta =>{
+        res.status(200).send(respuesta);
+    });
+}
 

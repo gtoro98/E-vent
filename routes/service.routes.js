@@ -1,6 +1,7 @@
 const  {authJwt}  = require("../middleware");
 const controller = require("../controllers/service.controller");
 
+
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -9,16 +10,23 @@ module.exports = function(app) {
     );
     next();
   });
-
   app.post(
-    "/api/service/create",
+    "/api/service/create", 
     [authJwt.verifyToken, authJwt.isProveedor],
     controller.createService,
   );
 
   app.get(
-    "/api/services",
+    "/api/services/",
     controller.findAllService
+  )
+  app.get(
+    "/api/services/:name",
+    controller.getServicebyName
+  )
+  app.get(
+    "/api/services/:proveedor_id",
+    controller.getServicebyName
   )
 
   app.delete(
@@ -30,7 +38,7 @@ module.exports = function(app) {
     "/api/services/:id",
     controller.findServiceById
   )
-
+ 
   app.put(
     "/api/services/:id",
     controller.updateService
