@@ -31,7 +31,7 @@ require('./routes/event.routes')(app);
 require('./routes/service.routes')(app);
 
 
-const port = process.env.port || 5000
+const port = process.env.port || 8080
 const host = '0.0.0.0';
 
 app.listen(port,host, () => {
