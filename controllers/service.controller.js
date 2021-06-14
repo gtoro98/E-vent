@@ -1,7 +1,5 @@
 const db = require("../models");
 const Service = db.service;
-
-
 const Op = db.Sequelize.Op;
 
 
@@ -17,6 +15,7 @@ exports.createService = (req, res) => {
         promotion : req.body.promotion,
         available: req.body.available,
         user_id: req.body.user_id,
+        image: req.body.image,
          
     }).then(dist =>{
         res.status(200).send(dist);
