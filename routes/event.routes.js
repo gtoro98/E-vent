@@ -12,7 +12,7 @@ module.exports = function(app) {
 
   app.post(
     "/api/event/create",
-    [authJwt.verifyToken, authJwt.isUser, verifyEvent.checkDate],
+    [authJwt.verifyToken, authJwt.isUser],
     controller.createEvent,
   );
 
