@@ -17,9 +17,12 @@ exports.createService = (req, res) => {
         price: req.body.price,
         promotion : req.body.promotion,
         available: req.body.available,
+        image: req.body.image,
         user_id: req.body.user_id,
          
     }).then(dist =>{
+      console.log('req.body.image');
+      console.log(req.body.image);
         res.status(200).send(dist);
         return;
     })
