@@ -49,8 +49,8 @@ module.exports = function(app) {
     controller.getServicebyName
   )
   app.get(
-    "/api/services/:proveedor_id",
-    controller.getServicebyName
+    "/api/services/proveedores/:user_id",
+    controller.findServicebyProveedor
   )
 
   app.delete(
