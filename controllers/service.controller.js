@@ -62,6 +62,7 @@ exports.findServiceById = (req,res) => {
     Service.findByPk(req.params.id)
     .then(respuesta=>{
         res.status(200).send(respuesta);
+        return;
     })
 }
 exports.getServicebyName = (req, res) =>{
