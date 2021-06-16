@@ -35,7 +35,7 @@ module.exports = function(app) {
   )
 
   app.get(
-    "/api/services/:id",
+    "/api/servicesById/:id",
     controller.findServiceById
   )
  
