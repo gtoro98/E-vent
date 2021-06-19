@@ -42,7 +42,7 @@ const controller = require("../controllers/service.controller");
   )
 
   app.get(
-    "/api/services/:id",
+    "/api/servicesById/:id",
     controller.findServiceById
   )
  

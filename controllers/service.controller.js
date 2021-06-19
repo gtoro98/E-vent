@@ -15,10 +15,13 @@ exports.createService = (req, res) => {
         price: req.body.price,
         promotion : req.body.promotion,
         available: req.body.available,
+        image: req.body.image,
         user_id: req.body.user_id,
         image: req.body.image,
          
     }).then(dist =>{
+      console.log('req.body.image');
+      console.log(req.body.image);
         res.status(200).send(dist);
         return;
     })
@@ -58,8 +61,8 @@ exports.deleteService = (req,res) =>{
   };
 
 exports.findServiceById = (req,res) => {
-    Service.findByPk(req.params.id)
-    .then(respuesta=>{
+
+    Service.findByPk(req.params.id).then(respuesta => {
         res.status(200).send(respuesta);
         return;
     })
