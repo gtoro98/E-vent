@@ -65,6 +65,25 @@ exports.allAccess = (req, res) => {
     return;
   };
 
+  exports.getUsersbyName = (req, res) =>{
+    Role.findByPk(1).then(role => {
+      role.getUsers(
+        {where: {
+          name: {
+            [Op.like]: '%' + req.params.name + '%'
+          } 
+        }}
+      ).then(proveedores => {
+        res.status(200).send(proveedores);
+        return;
+      })
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+    
+    return;
+  };
+  
   exports.getUserById = (req, res) =>{
 
     User.findByPk(req.params.id).then(user => {
@@ -150,3 +169,4 @@ exports.allAccess = (req, res) => {
     });
 }
 
+  

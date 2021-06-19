@@ -16,6 +16,7 @@ checkDate = (req, res, next) => {
 
     if (req.body.date < fecha){
         console.log("Probando")
+        console.log(req.body.date,fecha)
         return res.status(400).send({
             message: "Failed! Date already passed!"
         });

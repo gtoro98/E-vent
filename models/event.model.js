@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
       cant_personas: {
         type: Sequelize.INTEGER
       },
+      completado:{
+        type: Sequelize.BOOLEAN
+      }
     });
   
     return Event;
