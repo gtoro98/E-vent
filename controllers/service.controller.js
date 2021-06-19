@@ -86,7 +86,7 @@ exports.getServicebyName = (req, res) =>{
 exports.findServicebyProveedor = (req,res) => {
   Service.findAll({
     where:{
-      user_id: req.params.user_id
+      user_id: req.params.id
     }
   }).then(services => {
     res.status(200).send(services)

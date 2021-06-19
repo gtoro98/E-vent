@@ -1,16 +1,6 @@
 const  {authJwt}  = require("../middleware");
 const controller = require("../controllers/service.controller");
 
-
-module.exports = function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-  });
-
   
   
   module.exports = function(app) {
@@ -21,13 +11,6 @@ module.exports = function(app) {
         );
         next();
       });
-      
-      app.post(
-        "/api/service/create", 
-        [authJwt.verifyToken, authJwt.isProveedor],
-        controller.createService,
-      );
-
       
   app.post(
     "/services",
@@ -49,7 +32,7 @@ module.exports = function(app) {
     controller.getServicebyName
   )
   app.get(
-    "/api/services/proveedores/:user_id",
+    "/api/services/proveedores/:id",
     controller.findServicebyProveedor
   )
 
@@ -68,5 +51,5 @@ module.exports = function(app) {
     controller.updateService
   );
 
-  }
+  
 }
