@@ -16,10 +16,14 @@ module.exports = function(app) {
     controller.createEvent,
   );
 
+  app.get(
+    "/api/events/user/:id",
+    controller.findEventsbyUser
+  )
   app.post(
     "/api/event/:event_id/add/:service_id",
     //[authJwt.verifyToken, authJwt.isUser],
-    controller.createEvent,
+    controller.addService,
   );
 
 };
