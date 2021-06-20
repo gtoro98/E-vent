@@ -19,7 +19,21 @@ module.exports = function(app) {
   app.post(
     "/api/event/:event_id/add/:service_id",
     //[authJwt.verifyToken, authJwt.isUser],
-    controller.createEvent,
+    controller.addService,
   );
+
+  
+  app.get(
+    "/api/event/full/:event_id",
+    //[authJwt.verifyToken, authJwt.isUser],
+    controller.getFullEvent
+  )
+
+  app.delete(
+    "/api/event/:event_id/delete/:service_id",
+    //[authJwt.verifyToken, authJwt.isUser],
+    controller.deleteService
+  )
+
 
 };
