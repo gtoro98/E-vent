@@ -41,6 +41,13 @@ module.exports = function(app) {
     //[authJwt.verifyToken, authJwt.isAdmin],
     controller.getUsers
   );
+
+  app.get(
+    "/api/users/:name",
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    controller.getUsersbyName
+  );
+
   app.get(
     "/api/user/:id",
     //[authJwt.verifyToken, authJwt.isAdmin],
@@ -56,6 +63,11 @@ module.exports = function(app) {
 
   app.put(
     "/api/proveedor/:id",
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    controller.updateUser
+  )
+  app.put(
+    "/api/user/edit/:user_id",
     //[authJwt.verifyToken, authJwt.isAdmin],
     controller.updateUser
   )

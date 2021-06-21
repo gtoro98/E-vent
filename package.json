@@ -10,7 +10,6 @@
   },
   "author": "",
   "license": "ISC",
-  "procfile": "web: npm start",
   "dependencies": {
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -23,7 +22,6 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "sequelize-file": "^0.3.0"
+    "sequelize-file": "^0.0.2"
   }
-  
 }
