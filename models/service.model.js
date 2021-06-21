@@ -14,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       available: {
         type: Sequelize.BOOLEAN
-
       },
       image:{
         type: Sequelize.STRING

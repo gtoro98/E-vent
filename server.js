@@ -18,6 +18,7 @@ app.use(express.urlencoded({
 const Role = db.role;
 const User = db.user;
 const Event = db.event;
+const Service = db.service;
 const Op = db.Sequelize.Op;
 
 db.sequelize.sync();

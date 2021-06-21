@@ -46,7 +46,7 @@ db.user.belongsToMany(db.role, {
 
 
 db.event.belongsToMany(db.service, {
-  through: "event_service",
+  through: "event_services",
   foreignKey: "event_id",
   otherKey: "service_id",
 

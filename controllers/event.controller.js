@@ -22,6 +22,18 @@ exports.createEvent = (req, res) => {
   
 };
 
+exports.findEventsbyUser = (req,res) => {
+  Event.findAll({
+    where:{
+      user_id: req.params.id
+    }
+  }).then(events => {
+    res.status(200).send(events)
+  }).catch(err => {
+    res.status(400).send(err)
+  })
+}
+
 exports.addService = (req, res) => {
 
 
