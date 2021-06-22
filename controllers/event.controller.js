@@ -34,6 +34,18 @@ exports.findEventsbyUser = (req,res) => {
   })
 }
 
+exports.findEventbyId = (req,res) => {
+  Event.findByPk({
+    where:{
+      id: req.params.id
+    }
+  }).then(event => {
+    res.status(200).send(event)
+  }).catch(err => {
+    res.status(400).send(err)
+  })
+}
+
 exports.addService = (req, res) => {
 
 
@@ -49,16 +61,16 @@ exports.addService = (req, res) => {
   }).catch(err => {
     return res.status(400).send({ message: "Problem finding event!" });
   })
+} 
   
-  
-  exports.getFullEvent = (req,res) =>
+exports.getFullEvent = (req,res) =>
   Event.findByPk(req.params.event_id,{include:service}).then(evento =>{
     return res.status(200).send(evento);
   }).catch(err => {
     return res.status(400).send({err});
   })
   
-  exports.deleteService = (req, res) =>
+exports.deleteService = (req, res) =>
   Event.findByPk(req.params.event_id).then(evento =>{
     service.findByPk(req.params.service_id).then(servicio => {
       console.log(evento);
@@ -69,5 +81,5 @@ exports.addService = (req, res) => {
       return res.status(400).send({error: err})
     })
   })
-};
+;
 
