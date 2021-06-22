@@ -34,6 +34,16 @@ module.exports = function(app) {
     //[authJwt.verifyToken, authJwt.isUser],
     controller.deleteService
   )
+  app.get(
+    "/api/event/active/:user_id",
+    //[authJwt.verifyToken, authJwt.isUser],
+    controller.getEventActive
+  )
 
+  app.put(
+    "/api/event/completar/:event_id",
+    //[authJwt.verifyToken, authJwt.isUser],
+    controller.completarEvent
+  )
 
 };

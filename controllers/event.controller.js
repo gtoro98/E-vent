@@ -37,7 +37,7 @@ exports.addService = (req, res) => {
   }).catch(err => {
     return res.status(400).send({ message: "Problem finding event!" });
   })
-  
+};
   
   exports.getFullEvent = (req,res) =>
   Event.findByPk(req.params.event_id,{include:service}).then(evento =>{
@@ -57,5 +57,28 @@ exports.addService = (req, res) => {
       return res.status(400).send({error: err})
     })
   })
-};
+
+
+  exports.getEventActive = (req, res) =>
+  Event.findOne({where: { user_id: req.params.user_id,completado:false}}).then(
+    evento => {
+      return res.status(200).send(evento);
+    }).catch(err => {
+      return res.status(400).send({error: err})
+    })
+
+  exports.completarEvent = (req,res) =>
+    Event.update({
+      completado: true
+    },{ where: {
+      id: req.params.event_id
+    }
+    }).then(evento=>{
+      return res.status(200).send(evento);
+    }).catch(err => {
+      return res.status(400).send({error: err})
+    })
+
+
+
 
