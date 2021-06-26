@@ -51,5 +51,11 @@ const controller = require("../controllers/service.controller");
     controller.updateService
   );
 
+  app.get(
+    "/api/services/hired/:proveedor_id",
+    controller.getHiredServices
+  );
+
+
   
 }

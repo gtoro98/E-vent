@@ -19,6 +19,7 @@ const Role = db.role;
 const User = db.user;
 const Event = db.event;
 const Service = db.service;
+const Factura = db.factura;
 const Op = db.Sequelize.Op;
 
 db.sequelize.sync();
@@ -35,8 +36,8 @@ require('./routes/user.routes')(app);
 
 require('./routes/event.routes')(app);
 
-
 require('./routes/service.routes')(app);
+
 
 
 const port = process.env.PORT || 5000

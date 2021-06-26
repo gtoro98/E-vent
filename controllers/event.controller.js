@@ -1,5 +1,6 @@
 const db = require("../models");
 const Event = db.event;
+const Factura = db.factura;
 
 
 const Op = db.Sequelize.Op;
@@ -98,6 +99,12 @@ exports.deleteService = (req, res) =>
       id: req.params.event_id
     }
     }).then(evento=>{
+
+      Factura.create({
+        montoTotal: req.body.montoTotal,
+        user_id: req.body.user_id,
+        event_id: req.params.event_id,
+      })
       return res.status(200).send(evento);
     }).catch(err => {
       return res.status(400).send({error: err})

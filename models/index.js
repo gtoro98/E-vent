@@ -31,6 +31,7 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.event = require("../models/event.model.js")(sequelize, Sequelize);
 db.service = require("../models/service.model.js")(sequelize, Sequelize);
+db.factura = require("../models/factura.model.js")(sequelize, Sequelize);
 
 
 db.role.belongsToMany(db.user, {
@@ -62,6 +63,9 @@ db.service.belongsToMany(db.event, {
 
 db.event.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
 db.service.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
+
+db.factura.belongsTo(db.user, {foreignKey: 'user_id', targetKey: 'id'});
+db.factura.belongsTo(db.event, {foreignKey: 'event_id', targetKey: 'id'});
 
 db.ROLES = ["user", "admin", "proveedor"];
 

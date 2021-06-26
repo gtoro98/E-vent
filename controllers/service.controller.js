@@ -1,10 +1,12 @@
 const db = require("../models");
 const Service = db.service;
+const Event = db.event;
 const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-const { service } = require("../models");
+
+
 
 
 exports.createService = (req, res) => {
@@ -110,5 +112,18 @@ exports.updateService = (req,res) =>{
     }).then(respuesta =>{
         res.status(200).send(respuesta);
     });
+}
+
+exports.getHiredServices = (req,res) =>{
+  console.log("Proveedor Id: " + req.params.proveedor_id)
+  Service.findAll({where:{
+    user_id: req.params.proveedor_id
+  }, include: Event}).then(servicios =>{
+    console.log("consegui los servicios" + JSON.stringify(servicios))
+    res.status(200).send(servicios);
+    return;
+  }).catch(err => {
+    return res.status(400).send(err)
+  })
 }
 
