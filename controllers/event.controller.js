@@ -1,24 +1,33 @@
 const db = require("../models");
 const Event = db.event;
 const Factura = db.factura;
+const Service = db.service;
 
 
 const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-const { service } = require("../models");
+
 
 exports.createEvent = (req, res) => {
-
+    console.log("hasta aqui funciona")
+    console.log("Name: " + req.body.name)
+    console.log("Date: " + req.body.date)
+    console.log("Location: " + req.body.location)
+    console.log("cant_personas: " + req.body.cant_personas)
+    console.log("User_id: " + req.body.user_id)
     Event.create({
         name: req.body.name,
         date: req.body.date,
         location: req.body.location,
         cant_personas: req.body.cant_personas,
         user_id: req.body.user_id,
+        completado: false
       }).then(()=> {
-        return res.status(200).send({ message: "User was registered successfully!" });
+         
+        res.status(200).send({ message: "User was registered successfully!" });
+        return
       })
   
 };
@@ -52,7 +61,7 @@ exports.addService = (req, res) => {
 
   Event.findByPk(req.params.event_id).then( event => {
 
-    service.findByPk(req.params.service_id).then(service => {
+    Service.findByPk(req.params.service_id).then(service => {
       event.addService(service)
       return res.status(200).send({ message: "Event added successfully!" });
     }).catch(err => {
@@ -64,35 +73,46 @@ exports.addService = (req, res) => {
   })
 };
   
-  exports.getFullEvent = (req,res) =>
-  Event.findByPk(req.params.event_id,{include:service}).then(evento =>{
+  exports.getFullEvent = (req,res) =>{
+  Event.findByPk(req.params.event_id,{include:Service}).then(evento =>{
     return res.status(200).send(evento);
   }).catch(err => {
     return res.status(400).send({err});
   })
-  
-exports.deleteService = (req, res) =>
+} 
+exports.deleteService = (req, res) => {
+  console.log("Eliminando Servicio")
   Event.findByPk(req.params.event_id).then(evento =>{
-    service.findByPk(req.params.service_id).then(servicio => {
-      console.log(evento);
-    evento.removeService(servicio);
-    console.log(evento);
-    return res.status(200).send({message : "Service deleted successfully!"});
+    Service.findByPk(req.params.service_id).then(servicio => {
+      console.log("Evento: " + evento);
+
+      evento.removeService([servicio.id]).then(respuesta => {
+        console.log("PORQUE CONO NO SE BORRAAA")
+        console.log("Respuesta: " + respuesta)
+        res.status(200).send({message : "Service deleted successfully!"});
+        return
+      }).catch(err =>{
+        return res.status(400).send({error: err})
+      }) ;
+      servicio.removeEvent(evento);
+
+      console.log("Servicio: " + servicio);
+       
     }).catch(err => {
       return res.status(400).send({error: err})
     })
   })
+}
 
-
-  exports.getEventActive = (req, res) =>
+  exports.getEventActive = (req, res) => {
   Event.findOne({where: { user_id: req.params.user_id,completado:false}}).then(
     evento => {
       return res.status(200).send(evento);
     }).catch(err => {
       return res.status(400).send({error: err})
     })
-
-  exports.completarEvent = (req,res) =>
+  }
+  exports.completarEvent = (req,res) =>{
     Event.update({
       completado: true
     },{ where: {
@@ -109,7 +129,7 @@ exports.deleteService = (req, res) =>
     }).catch(err => {
       return res.status(400).send({error: err})
     })
-
+  }
 
 
 
