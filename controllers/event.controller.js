@@ -2,6 +2,7 @@ const db = require("../models");
 const Event = db.event;
 const Factura = db.factura;
 const Service = db.service;
+const User = db.user;
 
 
 const Op = db.Sequelize.Op;
@@ -124,9 +125,18 @@ exports.deleteService = (req, res) => {
         montoTotal: req.body.montoTotal,
         user_id: req.body.user_id,
         event_id: req.params.event_id,
+        metodo_pago: req.body.metodo_pago,
       })
       return res.status(200).send(evento);
     }).catch(err => {
+      return res.status(400).send({error: err})
+    })
+  }
+
+  exports.getFacturas = (req,res) => {
+    Factura.findAll({include: [Event, User]}).then((facturas => {
+      return res.status(200).send(facturas)
+    })).catch(err => {
       return res.status(400).send({error: err})
     })
   }

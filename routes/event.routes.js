@@ -49,5 +49,9 @@ module.exports = function(app) {
     //[authJwt.verifyToken, authJwt.isUser],
     controller.completarEvent
   )
-
+  app.get(
+    "/api/facturas",
+    //[authJwt.verifyToken, authJwt.isUser],
+    controller.getFacturas
+  )
 };
