@@ -65,7 +65,7 @@ const getUsers = (request, response) => {
   }
 
   //fernando*************************
-  app.post("/distribuidores", async(req,res) => {
+  /*app.post("/distribuidores", async(req,res) => {
     try {
         const { nombre } = req.body;
         const newDistribuidor = await pool.query(
@@ -136,7 +136,7 @@ try {
 } catch (error) {
     console.error(error.message)
 }
-})
+})*/
 
 ///fernando*******************
 
@@ -147,5 +147,6 @@ try {
   module.exports = {
     getUsers,
     getUserById,
+    pool
   }
   

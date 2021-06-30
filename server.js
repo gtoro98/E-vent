@@ -38,6 +38,9 @@ require('./routes/event.routes')(app);
 
 require('./routes/service.routes')(app);
 
+require('./routes/estadisticas.routes')(app);
+
+
 
 
 const port = process.env.PORT || 5000
