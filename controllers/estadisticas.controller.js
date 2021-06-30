@@ -18,16 +18,7 @@ exports.eventosPorAnio= async(req, res) => {
     }
     
 }
-exports.serviciosMasContratados= async(req, res) => {
-    try {
-        let results = await pool.pool.query('select s.name, count(es.service_id) cant from event_services es left join services s on s.id = es.service_id group by (s.name) order by cant desc limit 3;');
-        res.status(200).json(results.rows)
-     
-    } catch (error) {
-        console.error(error.message)
-    }
-    
-}
+
 /*2. Top 3 de los servicios más contratados*/
 exports.serviciosMasContratados= async(req, res) => {
     try {
