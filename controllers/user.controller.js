@@ -153,12 +153,11 @@ exports.allAccess = (req, res) => {
       });
   };
   exports.updateUser = (req,res) =>{
-    console.log("Upating user last name: " + req.body.lastName)
+    console.log("Upating user id: " + req.params.id)
     User.update({ 
         name: req.body.name,
         lastName: req.body.lastName || null,
         email: req.body.email,
-        image: req.body.image || null,
         direccion: req.body.direccion,
         telefono: req.body.telefono,
         cedula: req.body.cedula,

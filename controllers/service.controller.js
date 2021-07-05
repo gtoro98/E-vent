@@ -104,6 +104,7 @@ exports.updateService = (req,res) =>{
     Service.update({ name: req.body.name,
         description: req.body.description,
         price: req.body.price,
+        image: req.body.image,
         available: req.body.available,
        }, {
         where:{ 
