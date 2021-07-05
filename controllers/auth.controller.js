@@ -7,6 +7,7 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { user } = require("../models");
 
 exports.signup = (req, res) => {
   // Save User to Database
@@ -96,3 +97,50 @@ exports.logIn = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.changePassword = (req,res) => {
+  console.log("Upating user password : " + typeof(req.body.password))
+  if(req.body.password != ''){
+    User.update({ 
+        password: bcrypt.hashSync(req.body.password, 8),
+        
+       }, {
+        where:{ 
+            id : req.body.id
+        }
+    }).then(respuesta =>{
+        console.log("User Password Updated Sucsessfully!!")
+        res.status(200).send({ message: "User Password Updated Sucsessfully!!" });
+        return;
+    }).catch(err => {
+      console.log(err)
+      res.status(400).send({ message: "Error cambiando contrasena." })
+    });
+  }
+  else{
+    res.status(400).send({ message: "Error cambiando contrasena." })
+  }
+}
+
+exports.resetPassword = (req,res) => {
+  console.log("Upating user password : " + req.body.email)
+    User.findOne({where:{
+      email: req.body.email
+    }
+    }).then(user =>{
+      console.log("Conseguimos el user")
+      console.log(JSON.stringify(user))
+        user.update(
+          {
+            password: bcrypt.hashSync(user.telefono, 8)
+          }
+        ).then((respuesta) => {
+          console.log("User Password Updated Sucsessfully!!")
+          res.status(200).send({ message: "User Password Updated Sucsessfully!! Password is now User's telefono" });
+          return;
+        })
+        
+    }).catch(err => {
+      res.status(400).send({ message: "Error cambiando contrasena. Porfavor ingrese un correo valido" })
+    });
+}
